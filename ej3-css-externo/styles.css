@@ -1,0 +1,26 @@
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #e9eff5; 
+    color: #2c3e50; 
+    margin: 0;
+    padding: 40px;
+}
+
+h1 {
+    color: #1a2a3a;
+    text-align: center;
+    border-bottom: 3px solid #7c98c3;
+    padding-bottom: 10px;
+}
+
+
+
+.subtitulo-cv {
+    color: #ffffff;
+    background-color: #5b7495; 
+    padding: 12px 20px;     
+    margin-top: 30px;         
+    border-radius: 5px;
+    font-size: 1.1rem;
+    box-shadow: 2px 2px 5px rgba(26, 42, 58, 0.2);
+}
