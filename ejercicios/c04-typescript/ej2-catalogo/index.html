@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Libros</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; line-height: 1.6; }
+        .controles { background: #f4f4f4; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .stats-box { background: #e3f2fd; padding: 10px; border-left: 5px solid #2196f3; margin-top: 20px; font-weight: bold; }
+        ul { list-style: none; padding: 0; }
+        li { background: #fff; border: 1px solid #ddd; margin-bottom: 5px; padding: 10px; border-radius: 4px; }
+        button { cursor: pointer; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+
+    <section>
+        <h1>Catalogo</h1>
+
+        <div class="controles">
+            <input type="text" id="inputAutor" placeholder="Nombre del autor...">
+            <button id="filtrar">Filtrar por Autor</button>
+            <button id="mostrarDisponibles">Solo Disponibles</button>
+            <button id="mostrarTodos">Ver Todos</button>
+        </div>
+
+        <h3>Libros en Inventario:</h3>
+        <ul id="listado"></ul>
+        <p id="stats"></p>
+
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
