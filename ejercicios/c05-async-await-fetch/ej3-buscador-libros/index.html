@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Libros</title>
+    <style>
+        .libro-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        #error-msg {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Buscador de Libros</h1>
+
+    <form id="busqueda-form">
+        <input type="text" id="buscador" placeholder="Buscar libros...">
+        <button id="buscar">Buscar</button>
+    </form>
+
+    <p id="loading" style="display: none;">Buscando libros... </p>
+    <div id="resultados"></div>
+    <p id="error-msg"></p>
+
+    <script type="module"   src="app.js"></script>
+
+</body>
+</html>
