@@ -1,0 +1,71 @@
+:root {
+    --pixi-rosa: #ff85a2;
+    --pixi-lila: #e0b1cb;
+    --pixi-violeta: #9d4edd;
+}
+
+.titulo-pixi {
+    color: var(--pixi-violeta);
+    font-weight: bold;
+}
+
+.libro-portada-marco {
+    border: 4px solid var(--pixi-rosa);
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-pixi {
+    background-color: var(--pixi-rosa) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0 !important; 
+    font-weight: bold !important;
+    padding: 12px 30px !important;
+}
+
+.btn-pixi:hover {
+    background-color: #ff5c84 !important; 
+}
+
+.btn-pixi-outline {
+    background-color: var(--pixi-lila) !important;
+    color: var(--pixi-violeta) !important;
+    border: 2px solid var(--pixi-violeta) !important;
+    border-radius: 0 !important; 
+    font-weight: bold !important;
+    padding: 12px 30px !important;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-pixi-outline:hover {
+    background-color: #d4a5c1 !important;
+}
+
+.header-pixi {
+    background-color: var(--pixi-rosa);
+    color: white;
+}
+
+
+.btn-pixi-lila {
+    background-color: var(--pixi-lila) !important;
+    color: var(--pixi-violeta) !important;
+    border: 2px solid var(--pixi-violeta) !important;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.card-img-pixi {
+    height: 350px;
+    object-fit: cover;
+}
+
+.card-pixi {
+    border: 2px solid var(--pixi-lila);
+    border-radius: 0;
+}
