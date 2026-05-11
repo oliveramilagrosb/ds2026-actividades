@@ -55,3 +55,12 @@ form.addEventListener('submit', async (e) => {
         loadingEl.style.display = 'none';
     }
 });
+const formContacto = document.getElementById('contacto-form');
+if (formContacto) {
+    formContacto.onsubmit = (e) => {
+        e.preventDefault();
+        alert("¡Mensaje enviado con éxito! ✨ Gracias por contactarte con Librería Pixi.");
+        formContacto.reset();
+        return false;
+    };
+}
