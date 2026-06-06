@@ -1,20 +1,20 @@
-import { NavbarPixi } from './components/NavbarPixi';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from './components/Layout/layout';
 import { Home } from './pages/Home';
+import { Catalogo } from './pages/Catalogo';       
+import { LibroDetalle } from './pages/LibroDetalle';
+
 
 function App() {
   return (
-    <div style={{
-      backgroundColor: '#fcfbfe',
-      minHeight: '100vh',
-      width: '100%',  
-      margin: 0,
-      padding: 0,
-      paddingBottom: '3rem'
-      }}>
-      <NavbarPixi />
-      <Home />
-    </div>
-  );
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/libros/:id" element={<LibroDetalle />} />
+      </Routes>
+    </Layout>
+  );  
 }
 
 export default App; 

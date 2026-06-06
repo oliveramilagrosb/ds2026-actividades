@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import type { libroProps } from "../types/libro";
 
-export const CardLibro = ({titulo, autor, imagen}: libroProps) => {
+
+export const CardLibro = ({id, titulo, autor, imagen}: libroProps) => {
     const [esFavorito, setEsFavorito] = useState<boolean>(false);
 
     return (
@@ -28,9 +30,13 @@ export const CardLibro = ({titulo, autor, imagen}: libroProps) => {
                         {esFavorito ? "⭐En Favoritos" : "☆ Agregar a favoritos"}
                     </Button>
 
-                    <Button variant="outline-primary" size="sm" style={{ borderColor: '#6f42c1', color: '#6f42c1' }}>
+                    <Link 
+                        to={`/libros/${id}`} 
+                        className="btn btn-outline-primary btn-sm"
+                        style={{ borderColor: '#6f42c1', color: '#6f42c1' }}
+                    >
                         Ver detalle
-                    </Button>
+                    </Link>
                 </div>
             </Card.Body>       
         </Card>
