@@ -1,3 +1,8 @@
+const form = document.getElementById('busqueda-form');
+const input = document.getElementById('buscador');
+const resultadosDiv = document.getElementById('resultados');
+const errorEl = document.getElementById('error-msg');
+const loadingEl = document.getElementById('loading');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const query = input.value.trim();
