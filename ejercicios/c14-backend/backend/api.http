@@ -1,0 +1,8 @@
+### Estado del servidor
+GET http://localhost:3000/
+
+### Listar todos los libros
+GET http://localhost:3000/libros
+
+### Filtrar libros disponibles
+GET http://localhost:3000/libros?disponible=true
