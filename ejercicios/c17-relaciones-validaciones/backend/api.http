@@ -1,0 +1,107 @@
+@baseUrl = http://localhost:3000
+
+### Hello
+GET {{baseUrl}}/
+
+### Listar libros
+GET {{baseUrl}}/api/libros
+
+### Autores
+GET {{baseUrl}}/api/autores/1
+
+### Libros disponibles
+GET {{baseUrl}}/api/libros?disponible=true
+
+### Crear un autor
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Julio Cortázar",
+  "nacionalidad": "Argentina"
+}
+
+### Crear un libro
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Rayuela",
+  "precio": 7000,
+  "imagen": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80",
+  "descripcion": "Una novela fundamental de la literatura latinoamericana.",
+  "disponible": true,
+  "autorId": 1
+}
+
+### Actualizar un libro
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+
+{
+  "titulo": "Mujercitas (Edición Especial)",
+  "precio": 50000
+}
+
+### Actualizar un autor
+PUT {{baseUrl}}/api/autores/1
+Content-Type: application/json
+
+{
+  "nombre": "Louisa May Alcott",
+  "nacionalidad": "Estadounidense"
+}
+
+### Borrar un libro
+DELETE {{baseUrl}}/api/libros/6
+
+### Borrar un autor
+DELETE {{baseUrl}}/api/autores/999
+
+### errores a propósito
+
+### 400 — sin título
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "precio": 5000,
+  "imagen": "https://images.unsplash.com/photo-1512820790803-83ca734da794",
+  "descripcion": "Sin titulo",
+  "autorId": 1
+}
+
+### 400 — id inválido
+GET {{baseUrl}}/api/libros/abc
+
+### 400 / 409 — el autor no existe (formato válido, dato imposible)
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Huérfano",
+  "precio": 5000,
+  "imagen": "https://images.unsplash.com/photo-1512820790803-83ca734da794",
+  "descripcion": "Autor inexistente",
+  "autorId": 9999
+}
+
+### 409 — autor duplicado
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Louisa May Alcott",
+  "nacionalidad": "Estados Unidos"
+}
+
+### 409 — borrar un autor con libros (onDelete: Restrict)
+DELETE {{baseUrl}}/api/autores/1
+
+### 404 — actualizar recurso que no existe
+PUT {{baseUrl}}/api/libros/9999
+Content-Type: application/json
+
+{
+  "precio": 12000
+}
