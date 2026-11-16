@@ -1,11 +1,5 @@
-export const guardarToken = (token: string): void => {
-  localStorage.setItem("token", token);
-};
+const CLAVE = 'token';
 
-export const obtenerToken = (): string | null => {
-  return localStorage.getItem("token");
-};
-
-export const borrarToken = (): void => {
-  localStorage.removeItem("token");
-};
+export const guardarToken = (t: string) => localStorage.setItem(CLAVE, t);
+export const obtenerToken = () => localStorage.getItem(CLAVE);
+export const borrarToken = () => localStorage.removeItem(CLAVE);

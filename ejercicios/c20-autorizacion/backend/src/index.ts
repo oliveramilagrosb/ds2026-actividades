@@ -3,7 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes";
 import libroRoutes from "./routes/libro.routes";
 import autorRoutes from "./routes/autor.routes";
-import { errorMiddleware } from "./middlewares/error.middleware";
+import { errorHandler } from "./middlewares/error.middleware";
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use((_req, res) => {
   res.status(404).json({ error: "Ruta no encontrada" });
 });
 
-app.use(errorMiddleware);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
