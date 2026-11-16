@@ -1,0 +1,73 @@
+import { describe, it, expect, vi } from "vitest";
+import jwt from "jsonwebtoken";
+import type { Request, Response, NextFunction } from "express";
+import { authenticate, authorize } from "./auth.middleware";
+import { JWT_SECRET } from "../config/env"; 
+
+function mocks(req: Record<string, unknown> = {}) {
+  const res = {
+    status: vi.fn().mockReturnThis(),
+    json: vi.fn().mockReturnThis(),
+  } as unknown as Response;
+  const next = vi.fn() as unknown as NextFunction;
+  return { req: req as unknown as Request, res, next };
+}
+
+describe("authorize", () => {
+  it("responde 403 a un CLIENTE cuando la ruta pide ADMIN", () => {
+    const { req, res, next } = mocks({ usuario: { id: 2, rol: "CLIENTE" } });
+    authorize("ADMIN")(req, res, next);
+    expect(res.status).toHaveBeenCalledWith(403);
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it("deja pasar a un ADMIN cuando la ruta pide ADMIN", () => {
+    const { req, res, next } = mocks({ usuario: { id: 1, rol: "ADMIN" } });
+    authorize("ADMIN")(req, res, next);
+    expect(next).toHaveBeenCalledTimes(1);
+    expect(res.status).not.toHaveBeenCalled();
+  });
+
+  it("responde 403 si no hay usuario en el request", () => {
+    const { req, res, next } = mocks();
+    authorize("ADMIN")(req, res, next);
+    expect(res.status).toHaveBeenCalledWith(403);
+    expect(next).not.toHaveBeenCalled();
+  });
+});
+
+describe("authenticate", () => {
+  it("responde 401 'Falta el token' si no hay header Authorization", () => {
+    const { req, res, next } = mocks({ headers: {} });
+    authenticate(req, res, next);
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({ error: "Falta el token" });
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it("con un token válido llena req.usuario y llama a next", () => {
+    const token = jwt.sign({ id: 7, rol: "CLIENTE" }, JWT_SECRET, { expiresIn: "1h" });
+    const { req, res, next } = mocks({ headers: { authorization: `Bearer ${token}` } });
+    authenticate(req, res, next);
+    expect(next).toHaveBeenCalledTimes(1);
+    expect(req.usuario).toMatchObject({ id: 7, rol: "CLIENTE" });
+  });
+
+  it("responde 401 'Token inválido' con un token vencido", () => {
+    const token = jwt.sign({ id: 7, rol: "CLIENTE" }, JWT_SECRET, { expiresIn: -10 });
+    const { req, res, next } = mocks({ headers: { authorization: `Bearer ${token}` } });
+    authenticate(req, res, next);
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({ error: "Token inválido" });
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it("responde 401 'Token inválido' con un token firmado con otro secret", () => {
+    const token = jwt.sign({ id: 7, rol: "ADMIN" }, "otro-secret", { expiresIn: "1h" });
+    const { req, res, next } = mocks({ headers: { authorization: `Bearer ${token}` } });
+    authenticate(req, res, next);
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({ error: "Token inválido" });
+    expect(next).not.toHaveBeenCalled();
+  });
+});
